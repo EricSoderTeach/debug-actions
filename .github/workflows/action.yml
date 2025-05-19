@@ -1,7 +1,7 @@
 name: Debug Example
 
 on:
-  push:
+  workflow_dispatch:
 
 jobs:
   test-job:
