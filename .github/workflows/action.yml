@@ -1,0 +1,20 @@
+name: Debug Example
+
+on:
+  push:
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run a script with a hidden error
+        run: |
+          set -e
+          echo "Starting script"
+          # This command will fail, but the error is redirected to /dev/null
+          ls /nonexistent-directory 2>/dev/null
+          echo "Script completed"
+        env:
+          SECRET_VALUE: ${{ secrets.MY_SECRET }}
