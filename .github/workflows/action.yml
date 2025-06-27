@@ -1,20 +1,17 @@
-name: Debug Example
+name: Debug Real Error Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-job:
+  debug-real-error:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Run a script with a hidden error
+
+      - name: Step with real error and verbose output
         run: |
-          set -e
-          echo "Starting script"
-          # This command will fail, but the error is redirected to /dev/null
-          ls /nonexistent-directory 2>/dev/null
-          echo "Script completed"
-        env:
-          SECRET_VALUE: ${{ secrets.MY_SECRET }}
+          set -x
+          echo "Trying to read a non-existent file..."
+          cat /tmp/this-file-does-not-exist.txt
